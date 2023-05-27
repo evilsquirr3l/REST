@@ -8,7 +8,7 @@ public class Item
     
     public string Description { get; set; } = null!;
 
-    public Category Category { get; set; } = new();
+    public Category Category { get; set; }
 
     public Guid CategoryId { get; set; }
 }
