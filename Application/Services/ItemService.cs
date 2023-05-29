@@ -31,14 +31,16 @@ public class ItemService : IItemService
     {
         var skip = (pageNumber - 1) * pageSize;
 
-        var items = await _context.Items
+        var query = _context.Items
+            .Where(x => string.IsNullOrEmpty(categoryId.ToString()) || x.Category.Id == categoryId);
+
+        var totalItems = await query.CountAsync();
+
+        var items = await query
             .Skip(skip)
             .Take(pageSize)
-            .Where(x => string.IsNullOrEmpty(categoryId.ToString()) || x.Category.Id == categoryId)
             .Include(x => x.Category)
             .ToListAsync();
-
-        var totalItems = items.Count;
 
         var itemDtos = _mapper.Map<List<ItemDto>>(items);
 
@@ -72,9 +74,8 @@ public class ItemService : IItemService
     public async Task DeleteItemAsync(ItemDto itemDto)
     {
         var item = _mapper.Map<Item>(itemDto);
-        
+
         _context.Items.Remove(item);
         await _context.SaveChangesAsync();
     }
 }
-
