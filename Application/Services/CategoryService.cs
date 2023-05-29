@@ -73,4 +73,12 @@ public class CategoryService : ICategoryService
         _context.Categories.Remove(category);
         await _context.SaveChangesAsync();
     }
+
+    public async Task DeleteCategoryWithItemsAsync(CategoryDto categoryDto)
+    {
+        var items = _context.Items.Where(x => x.Category.Id == categoryDto.Id);
+        _context.Items.RemoveRange(items);
+        
+        await DeleteCategoryAsync(categoryDto);
+    }
 }

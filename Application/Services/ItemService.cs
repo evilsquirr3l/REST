@@ -38,7 +38,7 @@ public class ItemService : IItemService
             .Include(x => x.Category)
             .ToListAsync();
 
-        var totalItems = await _context.Items.CountAsync();
+        var totalItems = items.Count;
 
         var itemDtos = _mapper.Map<List<ItemDto>>(items);
 

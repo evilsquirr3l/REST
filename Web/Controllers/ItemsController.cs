@@ -28,7 +28,7 @@ public class ItemsController : ControllerBase
     {
         var item = await _itemService.GetItemByIdAsync(id);
 
-        if (item == null)
+        if (item is null)
         {
             return NotFound();
         }

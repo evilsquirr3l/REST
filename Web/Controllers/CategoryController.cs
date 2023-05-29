@@ -28,7 +28,7 @@ public class CategoryController : ControllerBase
     {
         var category = await _categoryService.GetCategoryByIdAsync(id);
 
-        if (category == null)
+        if (category is null)
         {
             return NotFound();
         }
@@ -70,6 +70,21 @@ public class CategoryController : ControllerBase
         }
 
         await _categoryService.DeleteCategoryAsync(category);
+
+        return NoContent();
+    }
+    
+    [HttpDelete("{id}/items")]
+    public async Task<ActionResult> DeleteCategoryWithItems(Guid id)
+    {
+        var category = await _categoryService.GetCategoryByIdAsync(id);
+
+        if (category is null)
+        {
+            return NotFound();
+        }
+
+        await _categoryService.DeleteCategoryWithItemsAsync(category);
 
         return NoContent();
     }
