@@ -27,14 +27,14 @@ public class ItemService : IItemService
         return _mapper.Map<ItemDto>(item);
     }
 
-    public async Task<PagedResult<ItemDto>> GetAllItemsAsync(int pageNumber, int pageSize, string? categoryName = null)
+    public async Task<PagedResult<ItemDto>> GetAllItemsAsync(int pageNumber, int pageSize, Guid? categoryId = null)
     {
         var skip = (pageNumber - 1) * pageSize;
 
         var items = await _context.Items
             .Skip(skip)
             .Take(pageSize)
-            .Where(x => string.IsNullOrEmpty(categoryName) || x.Category.Name == categoryName)
+            .Where(x => string.IsNullOrEmpty(categoryId.ToString()) || x.Category.Id == categoryId)
             .Include(x => x.Category)
             .ToListAsync();
 
