@@ -59,9 +59,9 @@ public class ItemService : IItemService
         return _mapper.Map<ItemDto>(item);
     }
 
-    public async Task<ItemDto> UpdateItemAsync(ItemDto itemDto)
+    public async Task<ItemDto> UpdateItemAsync(BaseItem baseItem)
     {
-        var item = _mapper.Map<Item>(itemDto);
+        var item = _mapper.Map<Item>(baseItem);
 
         _context.Items.Update(item);
         await _context.SaveChangesAsync();

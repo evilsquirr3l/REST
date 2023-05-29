@@ -45,7 +45,7 @@ public class ItemsController : ControllerBase
     }
     
     [HttpPut("{id}")]
-    public async Task<ActionResult<ItemDto>> UpdateItem(Guid id, ItemDto itemDto)
+    public async Task<ActionResult<ItemDto>> UpdateItem(Guid id, BaseItem baseItem)
     {
         var item = await _itemService.GetItemByIdAsync(id);
 
@@ -54,7 +54,7 @@ public class ItemsController : ControllerBase
             return NotFound();
         }
 
-        var updatedItem = await _itemService.UpdateItemAsync(itemDto);
+        var updatedItem = await _itemService.UpdateItemAsync(baseItem);
 
         return Ok(updatedItem);
     }

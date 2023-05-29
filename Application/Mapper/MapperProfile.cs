@@ -13,5 +13,6 @@ public class MapperProfile : Profile
         
         CreateMap<BaseCategory, Category>();
         CreateMap<BaseItem, Item>();
+        CreateMap<BaseItem, ItemDto>().ReverseMap();
     }
 }
