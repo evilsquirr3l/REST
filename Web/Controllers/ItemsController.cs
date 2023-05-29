@@ -16,9 +16,9 @@ public class ItemsController : ControllerBase
     }
     
     [HttpGet]
-    public async Task<ActionResult<PagedResult<ItemDto>>> GetItems(int pageNumber = 1, int pageSize = 10)
+    public async Task<ActionResult<PagedResult<ItemDto>>> GetItems(int pageNumber = 1, int pageSize = 10, string? categoryName = null)
     {
-        var items = await _itemService.GetAllItemsAsync(pageNumber, pageSize);
+        var items = await _itemService.GetAllItemsAsync(pageNumber, pageSize, categoryName);
 
         return Ok(items);
     }

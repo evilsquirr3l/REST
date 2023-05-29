@@ -34,8 +34,8 @@ public class ItemService : IItemService
         var items = await _context.Items
             .Skip(skip)
             .Take(pageSize)
+            .Where(x => string.IsNullOrEmpty(categoryName) || x.Category.Name == categoryName)
             .Include(x => x.Category)
-            .Where(x => x.Category.Name == categoryName)
             .ToListAsync();
 
         var totalItems = await _context.Items.CountAsync();

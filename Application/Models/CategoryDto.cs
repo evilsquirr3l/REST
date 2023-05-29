@@ -1,3 +1,3 @@
 namespace Application.Models;
 
-public record CategoryDto(Guid Id, string Name, string Description, ICollection<ItemDto> Items);
+public record CategoryDto(Guid Id, string Name, string Description);
