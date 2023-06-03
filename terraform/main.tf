@@ -48,3 +48,11 @@ resource "azurerm_linux_web_app" "main" {
     }
   }
 }
+
+resource "azurerm_container_registry" "acr" {
+  name                = "containerRegistryHometaskDeploymentModule"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  sku                 = "Premium"
+  admin_enabled = true
+}
