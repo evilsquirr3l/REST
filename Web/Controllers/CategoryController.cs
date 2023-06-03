@@ -6,11 +6,11 @@ namespace Web.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class CategoryController : ControllerBase
+public class CategoriesController : ControllerBase
 {
     private readonly ICategoryService _categoryService;
 
-    public CategoryController(ICategoryService categoryService)
+    public CategoriesController(ICategoryService categoryService)
     {
         _categoryService = categoryService;
     }
@@ -41,7 +41,7 @@ public class CategoryController : ControllerBase
     {
         var category = await _categoryService.CreateCategoryAsync(baseCategory);
 
-        return CreatedAtAction(nameof(CreateCategory), new { id = category.Id }, category);
+        return CreatedAtAction(nameof(GetCategoryById), new { id = category.Id }, category);
     }
     
     [HttpPut("{id}")]
